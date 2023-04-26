@@ -24,10 +24,7 @@ function PopupWithForm(props) {
         >
           {props.children}
           <button type="submit" className="popup__button-save">
-            {((props.name === "edit" || props.name === "avatar") &&
-              "Сохранить") ||
-              (props.name === "add" && "Создать") ||
-              (props.name === "delete" && "Да")}
+              {props.buttonText}
           </button>
         </form>
       </div>
