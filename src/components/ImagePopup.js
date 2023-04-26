@@ -1,13 +1,13 @@
-
-
 function ImagePopup(props) {
   return (
     <div
-      className={`popup popup_type_${props.name} ${props.isOpen}`}
+      className={`popup popup_type_${props.name} ${
+        props.isOpen && "popup_visible"
+      }`}
       onClick={props.onClose}
     >
       <div
-        className="popup__container"
+        className="popup__container_type_image"
         onClick={(evt) => evt.stopPropagation()}
       >
         <button
@@ -20,7 +20,7 @@ function ImagePopup(props) {
           src={props.card.link}
           alt={props.card.name}
         />
-        <p className="popup__title">{props.card.name}</p>
+        <p className="popup__title_type_image">{props.card.name}</p>
       </div>
     </div>
   );

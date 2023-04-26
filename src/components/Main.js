@@ -1,9 +1,14 @@
-import avatar from "../images/kusto.jpg";
 import api from "../utils/api";
 import { useEffect, useState } from "react";
+import Card from "./Card";
 
-
-function Main({ onEditProfile }) {
+function Main({
+  onEditProfile,
+  onAddPlace,
+  onEditAvatar,
+  onCardClick,
+  onClose,
+}) {
   const [userName, setUserName] = useState("");
   const [userDescription, setUserDescription] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
@@ -27,12 +32,10 @@ function Main({ onEditProfile }) {
       .catch((err) => console.log(err));
   }, []);
 
-  
-
   return (
     <main>
       <section className="profile">
-        <div className="profile__avatar-block">
+        <div className="profile__avatar-block" onClick={onEditAvatar}>
           <img className="profile__avatar" src={userAvatar} alt="Жак Кусто" />
         </div>
         <div className="profile__profile-info">
@@ -46,11 +49,23 @@ function Main({ onEditProfile }) {
           </div>
           <p className="profile__subtitle">{userDescription}</p>
         </div>
-        <button type="button" className="profile__add-button"></button>
+        <button
+          type="button"
+          className="profile__add-button"
+          onClick={onAddPlace}
+        ></button>
       </section>
 
+      {/* Шаблон карточек */}
       <section className="cards">
-        {/* <!-- ШАБЛОН КАРТОЧЕК ИЗ ТЕМПЛЕЙТА --> */}
+        {cards.map((card) => (
+          <Card
+            key={card._id}
+            data={card}
+            onCardClick={onCardClick}
+            onClose={onClose}
+          />
+        ))}
       </section>
     </main>
   );
