@@ -11,14 +11,11 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
   const [isViewPopupOpen, setIsViewPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
-  
- 
 
   const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setIsAddPlacePopupOpen(true);
   const handleEditAvatarClick = () => setIsEditAvatarPopupOpen(true);
-  // const handleCardClick = () => setIsViewPopupOpen(true);
-  
+
   const handleCardClick = (props) => {
     setSelectedCard(props);
     setIsViewPopupOpen(true);
@@ -104,14 +101,6 @@ function App() {
       </PopupWithForm>
 
       {/* <!-- ПОПАП ОТКРЫТИЕ КАРТОЧКИ --> */}
-      {/* <div className="popup popup_type_image">
-        <div className="popup__container popup__container_type_image">
-          <img className="popup__image" src="#" alt="#" />
-          <button type="button" className="popup__button-close"></button>
-          <h2 className="popup__title popup__title_type_image"></h2>
-        </div>
-      </div> */}
-
       <ImagePopup
         isOpen={isViewPopupOpen}
         name="view"
@@ -119,9 +108,23 @@ function App() {
         onClose={closeAllPopups}
       />
 
-
-
-
+      {/* <!-- ПОПАП ЗАМЕНЫ АВАТАРА --> */}
+      <PopupWithForm
+        name="avatar"
+        title="Обновить аватар"
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+      >
+        <input
+          id="avatar"
+          type="url"
+          name="avatar"
+          className="popup__input popup__input_avatar_link"
+          placeholder="Ссылка на картинку"
+          required
+        />
+        <span className="popup__input-error avatar-error"></span>
+      </PopupWithForm>
 
       {/* <!--ПОПАП ПОДТВЕРЖДЕНИЯ УДАЛЕНИЕ ФОТО--> */}
       <div className="popup popup_type_delete">
@@ -140,23 +143,6 @@ function App() {
           </form>
         </div>
       </div>
-
-      {/* <!-- ПОПАП ЗАМЕНЫ АВАТАРА --> */}
-      <PopupWithForm
-        name="avatar"
-        title="Обновить аватар"
-        isOpen={isEditAvatarPopupOpen}
-        onClose={closeAllPopups}>
-          <input
-              id="avatar"
-              type="url"
-              name="avatar"
-              className="popup__input popup__input_avatar_link"
-              placeholder="Ссылка на картинку"
-              required
-            />
-            <span className="popup__input-error avatar-error"></span>
-        </PopupWithForm>
 
       <Footer />
     </div>
