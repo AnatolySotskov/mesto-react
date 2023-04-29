@@ -9,7 +9,6 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isViewPopupOpen, setIsViewPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
 
   const handleEditProfileClick = () => setIsEditProfilePopupOpen(true);
@@ -18,14 +17,12 @@ function App() {
 
   const handleCardClick = (props) => {
     setSelectedCard(props);
-    setIsViewPopupOpen(true);
   };
 
   const closeAllPopups = () => {
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditAvatarPopupOpen(false);
-    setIsViewPopupOpen(false);
     setSelectedCard({});
   };
 
@@ -104,7 +101,6 @@ function App() {
 
       {/* <!-- ПОПАП ОТКРЫТИЕ КАРТОЧКИ --> */}
       <ImagePopup
-        isOpen={isViewPopupOpen}
         name="view"
         card={selectedCard}
         onClose={closeAllPopups}

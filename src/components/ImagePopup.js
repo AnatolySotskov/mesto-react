@@ -1,9 +1,8 @@
 function ImagePopup(props) {
   return (
     <div
-      className={`popup popup_type_${props.name} ${
-        props.isOpen && "popup_visible"
-      }`}
+      className={`popup popup_type_${props.name} 
+      ${Object.keys(props.card).length !== 0 && "popup_visible"}`}
       onClick={props.onClose}
     >
       <div
