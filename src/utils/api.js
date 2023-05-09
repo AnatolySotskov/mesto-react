@@ -68,8 +68,8 @@ class Api {
     }).then(this._handleResponse);
   }
 
-  toggleLike({ cardId, isLike }) {
-    if (isLike === true) {
+  toggleLike(cardId, isLiked) {
+    if (isLiked === true) {
       return this._removeLike(cardId);
     } else {
       return this._setLike(cardId);

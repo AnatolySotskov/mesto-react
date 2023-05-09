@@ -1,6 +1,6 @@
-import api from "../utils/api";
-import { useEffect, useState } from "react";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
+import { useContext } from "react";
 
 function Main({
   onEditProfile,
@@ -8,46 +8,32 @@ function Main({
   onEditAvatar,
   onCardClick,
   onClose,
+  cards,
+  onCardLike,
+  onCardDelete,
 }) {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    api
-      .getInfoUser()
-      .then((data) => {
-        setUserName(data.name);
-        setUserDescription(data.about);
-        setUserAvatar(data.avatar);
-      })
-      .catch((err) => console.log(err));
-
-    api
-      .getCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const currentUser = useContext(CurrentUserContext);
 
   return (
     <main>
       <section className="profile">
         <div className="profile__avatar-block" onClick={onEditAvatar}>
-          <img className="profile__avatar" src={userAvatar} alt="Жак Кусто" />
+          <img
+            className="profile__avatar"
+            src={currentUser.avatar}
+            alt="Жак Кусто"
+          />
         </div>
         <div className="profile__profile-info">
           <div className="profile__title-container">
-            <h1 className="profile__title">{userName}</h1>
+            <h1 className="profile__title">{currentUser.name}</h1>
             <button
               type="button"
               className="profile__edit-button"
               onClick={onEditProfile}
             ></button>
           </div>
-          <p className="profile__subtitle">{userDescription}</p>
+          <p className="profile__subtitle">{currentUser.about}</p>
         </div>
         <button
           type="button"
@@ -64,6 +50,8 @@ function Main({
             data={card}
             onCardClick={onCardClick}
             onClose={onClose}
+            onCardLike={onCardLike}
+            onCardDelete={onCardDelete}
           />
         ))}
       </section>
